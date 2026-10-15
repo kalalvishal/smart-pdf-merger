@@ -8,7 +8,7 @@ The application provides an intuitive interface, native macOS folder selection, 
 
 ## 🖥️ Application Preview
 
-![Smart PDF Merger Application Preview](images/app-preview.png)
+![Smart PDF Merger Application Preview](images/app-preview-01.png)
 
 *Illustrative preview of the Smart PDF Merger interface.*
 
