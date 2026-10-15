@@ -1,35 +1,41 @@
 # 📄 Smart PDF Merger
 
-**A simple, local PDF and image merging application built with Python and Streamlit.**
+**A simple, user-friendly PDF and image merging application built with Python and Streamlit.**
 
-Smart PDF Merger allows users to combine multiple PDF documents and images into a single PDF while maintaining complete control over document selection, merge order, and output location.
+Smart PDF Merger allows users to combine multiple PDFs and images into a single PDF document while maintaining complete control over file selection, document order, and output location.
 
-The application features a user-friendly web interface, native macOS folder selection, automatic file discovery, and one-command environment setup.
+The application provides an intuitive interface, native macOS folder selection, automatic file discovery, and automated setup using Python virtual environments.
 
-## ✨ Features
+## 🖥️ Application Preview
 
-- **Multiple File Formats:** Supports PDF, JPG, JPEG, and PNG.
-- **Native macOS Folder Picker:** Browse source and destination folders through native macOS dialogs.
-- **Automatic File Discovery:** Automatically displays supported files after selecting a source folder.
-- **Selective Merging:** Use checkboxes to choose exactly which files to include.
-- **Custom File Ordering:** Rearrange selected documents using up/down controls before merging.
-- **PDF Bookmarks:** Automatically creates bookmarks using the original filenames.
-- **Image-to-PDF Conversion:** Converts supported images into PDF pages, handling image orientation and transparency.
-- **Custom Output:** Choose the destination folder and output filename.
-- **Overwrite Protection:** Prevents accidental replacement of existing output files.
-- **Local Processing:** Documents are processed locally without requiring a cloud-based conversion service.
-- **Automated Setup:** A bootstrap script creates the Python virtual environment, installs dependencies, and launches the application.
+![Smart PDF Merger Application Preview](media/sample.png)
+
+*Illustrative preview of the Smart PDF Merger interface.*
+
+## ✨ Key Features
+
+- 📂 **Native Folder Selection** — Browse and select source and destination folders using native macOS dialogs.
+- 📄 **Multiple File Formats** — Merge PDF, JPG, JPEG, and PNG files into one PDF.
+- 🔍 **Automatic File Discovery** — Automatically display supported files after selecting a source folder.
+- ☑️ **Flexible File Selection** — Select individual files using checkboxes, or use Select All and Clear All.
+- ⬆️ **Custom File Ordering** — Rearrange selected documents with up/down controls.
+- 📑 **PDF Bookmarks** — Automatically create bookmarks based on the original filenames.
+- 🖼️ **Image Conversion** — Convert JPG, JPEG, and PNG files into PDF pages while handling orientation and transparency.
+- 💾 **Custom Output Location** — Choose your destination folder and merged PDF filename.
+- 🛡️ **Overwrite Protection** — Prevent accidental overwriting of existing files.
+- 🔒 **Local Processing** — Process documents locally without uploading them to a document-conversion service.
+- 🚀 **Automated Setup** — Automatically create a virtual environment, install dependencies, and launch the application.
 
 ## 🛠️ Technology Stack
 
 | Technology | Purpose |
 |---|---|
-| Python | Application development |
-| Streamlit | Interactive web interface |
+| Python 3.10+ | Core application |
+| Streamlit | Web-based user interface |
 | pypdf | PDF merging and bookmarks |
-| Pillow (PIL) | Image processing and PDF conversion |
-| AppleScript | Native macOS folder selection |
-| venv | Isolated Python environment |
+| Pillow | Image processing and PDF conversion |
+| AppleScript | Native macOS folder picker |
+| Python venv | Virtual environment management |
 
 ## 📁 Project Structure
 
@@ -40,20 +46,20 @@ smart-pdf-merger/
 ├── requirements.txt
 ├── README.md
 ├── .gitignore
-└── Start PDF Merger.command    # Optional macOS launcher
+├── images/
+│   └── app-preview.png
+└── Start PDF Merger.command   # Optional
 ```
 
-The `.venv/` directory is automatically created during setup and should not be committed to Git.
+The `.venv/` directory is created automatically during installation and should not be committed to Git.
 
-## 🚀 Getting Started
+## 🚀 Installation and Setup
 
 ### Prerequisites
 
 - Python 3.10 or later
-- macOS for native folder-selection dialogs
-- Internet connection for initial dependency installation
-
-The application also supports manually entered folder paths when native macOS dialogs are unavailable.
+- macOS for native folder-selection pop-ups
+- Internet connection for the initial dependency installation
 
 ### Option 1: Automatic Setup (Recommended)
 
@@ -72,19 +78,19 @@ python3 bootstrap.py
 
 The bootstrap script automatically:
 
-1. Verifies the Python version.
-2. Creates a virtual environment if one does not exist.
-3. Installs dependencies from `requirements.txt`.
-4. Verifies the required Python libraries.
+1. Checks the Python version.
+2. Creates a `.venv` virtual environment if needed.
+3. Installs the required libraries.
+4. Verifies installed dependencies.
 5. Launches the Streamlit application.
 
-Open the application in your browser:
+Open the application at:
 
 **http://localhost:8501**
 
-### Option 2: Manual Installation
+You do not need to activate the virtual environment manually.
 
-Clone the repository and navigate to the project directory.
+### Option 2: Manual Setup
 
 Create a virtual environment:
 
@@ -92,7 +98,7 @@ Create a virtual environment:
 python3 -m venv .venv
 ```
 
-Activate it:
+Activate the environment:
 
 ```bash
 source .venv/bin/activate
@@ -110,168 +116,76 @@ Launch the application:
 streamlit run app.py
 ```
 
-### Option 3: macOS Launcher (Optional)
+### Option 3: One-Click macOS Launcher
 
-If the repository includes `Start PDF Merger.command`, make it executable:
+If the optional launcher is included, make it executable:
 
 ```bash
 chmod +x "Start PDF Merger.command"
 ```
 
-You can then launch the application through Finder by double-clicking the launcher.
+Double-click `Start PDF Merger.command` in Finder to run the application.
 
 ## 📖 How to Use
 
 ### Step 1: Select Source Folder
 
-Click **Browse** to select the folder containing the documents you want to merge.
+Click **Browse** to select the folder containing your PDF and image files.
 
-The application automatically discovers PDF, JPG, JPEG, and PNG files in that folder.
-
-Only files directly inside the selected folder are listed; subfolders are not scanned.
+The application automatically detects supported files in the selected folder.
 
 ### Step 2: Select Files
 
-All discovered files appear as individual checkboxes.
-
-- Check the files you want to merge.
-- Use **Select All** to select every supported file.
-- Use **Clear All** to remove all selections.
-
-### Step 3: Arrange File Order
-
-Selected files appear in the merge-order section.
-
-Use the up/down arrow buttons to rearrange their sequence.
-
-The first item in the list becomes the first document in the merged PDF.
-
-**Example:**
-
-```text
-1. Cover_Letter.pdf
-2. Passport.jpeg
-3. Experience_Letter.pdf
-4. Certificate.png
-```
-
-### Step 4: Select Destination Folder
-
-Click **Browse** to choose where the final merged PDF should be saved.
-
-### Step 5: Enter Output Filename
-
-Enter a filename, such as:
-
-```text
-Final_Documents.pdf
-```
-
-The application automatically adds the `.pdf` extension if it is missing.
-
-### Step 6: Merge Documents
-
-Click **Merge Files**.
-
-The application processes the selected documents in the specified order and saves the merged PDF to your selected destination.
-
-A download option is also displayed after successful merging.
-
-## 📑 PDF Bookmark Support
-
-Smart PDF Merger automatically adds bookmarks based on the original source filenames.
+All supported files appear automatically with checkboxes.
 
 For example:
 
 ```text
-Final_Documents.pdf
-├── Cover_Letter
-├── Passport
-├── Experience_Letter
-└── Certificate
+☑ Document_01.pdf
+☑ Image_01.jpeg
+☐ Document_02.pdf
+☑ Image_02.png
 ```
 
-This makes it easier to navigate large merged documents.
+Use **Select All** or **Clear All** to manage multiple files quickly.
 
-## 🖼️ Supported File Formats
+### Step 3: Arrange Document Order
 
-| File Format | Supported | Processing |
-|---|---|---|
-| PDF | ✅ | Merged directly |
-| JPG | ✅ | Converted to PDF |
-| JPEG | ✅ | Converted to PDF |
-| PNG | ✅ | Converted to PDF |
+After selecting files, use the up/down arrows to specify the order in which they should appear in the merged PDF.
 
-Images are added as PDF pages, using their image dimensions rather than automatically resizing them to A4 or Letter paper.
-
-## 🔒 Privacy and Security
-
-Smart PDF Merger is designed for local execution.
-
-- Files are read from user-selected local folders.
-- PDF merging takes place locally.
-- No cloud document-conversion API is required.
-- Original source documents are not modified.
-- Existing output files are protected from accidental overwriting.
-
-The initial dependency installation requires internet access, and Streamlit may provide its usual optional telemetry functionality.
-
-## ⚙️ Configuration
-
-Dependencies are listed in `requirements.txt`:
+Example:
 
 ```text
-streamlit>=1.36
-pypdf>=4.0
-Pillow>=10.0
+1. Document_01.pdf
+2. Image_01.jpeg
+3. Document_02.pdf
+4. Image_02.png
 ```
 
-The bootstrap script installs these dependencies in an isolated `.venv` environment.
+The first document in the list will appear first in the output PDF.
 
-## 🧭 Platform Compatibility
+### Step 4: Select Destination Folder
 
-| Platform | Application | Native Folder Picker |
-|---|---|---|
-| macOS | ✅ | ✅ |
-| Windows | Python/Streamlit compatible | Manual path entry |
-| Linux | Python/Streamlit compatible | Manual path entry |
+Click **Browse** to select the folder where the final merged PDF should be saved.
 
-The native Finder-style folder picker is implemented using AppleScript and is available only when the application runs locally on macOS.
+### Step 5: Enter Output Filename
 
-## 🗺️ Future Enhancements
+Specify the output filename:
 
-Potential enhancements include:
+```text
+Merged_Documents.pdf
+```
 
-- [ ] Drag-and-drop file reordering
-- [ ] PDF and image previews before merging
-- [ ] Individual PDF page selection
-- [ ] A4 and Letter page-size options
-- [ ] PDF compression
-- [ ] Password-protected PDF support
-- [ ] Windows and Linux native folder pickers
-- [ ] Packaged desktop application
+If the `.pdf` extension is missing, the application adds it automatically.
 
-## 🤝 Contributing
+### Step 6: Merge Files
 
-Contributions, bug reports, and feature suggestions are welcome.
+Click **Merge Files**.
 
-To contribute:
+The application combines the selected documents according to the specified sequence and saves the output to your selected destination folder.
 
-1. Fork the repository.
-2. Create a feature branch.
-3. Commit your changes.
-4. Open a pull request explaining your changes.
+A download option is displayed after successful merging.
 
-## 📜 License
+## 📑 Automatic PDF Bookmarks
 
-Add a license file to the repository if you intend to distribute or accept contributions under an open-source license. The MIT License is one possible choice.
-
-## ⭐ Support
-
-If you find Smart PDF Merger useful, consider starring the GitHub repository.
-
-Feedback and feature suggestions are welcome through GitHub Issues.
-
----
-
-**Built with Python, Streamlit, pypdf, and Pillow.**
+Smart PDF Merger creates a bookmark for each original source file,
